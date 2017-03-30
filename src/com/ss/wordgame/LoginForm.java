@@ -60,7 +60,7 @@ public class LoginForm extends JPanel implements ActionListener{
 	
 	public void loginCheck(){
 		String id=t_id.getText();
-		String pw=new String(t_pw.getPassword()); //getPassword()는 char[]배열 반환
+		String pw=new String(t_pw.getPassword()); //getPassword()는 char[]배열 반환 String생성자중 이배열을 받는것이 있다.
 		if(id.equals("batman")&&pw.equals("1234")){
 			JOptionPane.showMessageDialog(this, "로그인 완료");
 			gameWindow.setPage(1);	
