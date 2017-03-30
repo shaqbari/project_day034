@@ -14,11 +14,11 @@ package com.ss.gameframework;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel implements Runnable{
-	
+public class GamePanel extends JPanel implements Runnable{	
 	public static final int WIDTH =400;
 	public static final int HEIGHT =300;
 	public static final int SCALE =2; //유저가변하게 하려면 변수로 해도 된다.
@@ -43,12 +43,21 @@ public class GamePanel extends JPanel implements Runnable{
 		objectManager=new ObjectManager();
 		
 		//주인공 등장 시키기
-		player=new Player(objectManager, 100, 100, 50, 50);
+		player=new Player(objectManager, ObjectId.Player, 100, 100, 50, 50);
 		objectManager.addObject(player); //1명 추가
+		
+		//적군 등장
+		Random r=new Random();
+		for(int i=0; i<10; i++){
+			int x=r.nextInt(WIDTH*SCALE-50+1)+50;
+			int y=r.nextInt(HEIGHT*SCALE-50+1)+50;
+			Enemy enemy=new Enemy(objectManager, ObjectId.Enemy, x, y, 30, 30);
+			objectManager.addObject(enemy);
+		}
 		
 		//패널과 키보드 리스너 연결
 		this.addKeyListener(new KeyBoard(player));
-		//포커스가 처음시작할때 윈도우에 있기 때문에 패널로 옮겨야 작동한다.
+		//포커스가 처음시작할때 윈도우에 있기 때문에 윈도우에서 패널로 옮겨야 작동한다.
 		
 		
 	}	

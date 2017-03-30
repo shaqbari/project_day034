@@ -10,9 +10,11 @@
 package com.ss.gameframework;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 abstract public class GameObject {
 	ObjectManager objectManager; //부모가 가지면 자식들도 모두 가지게 된다. 자식들이 따로안가지고 와도 된다.
+	ObjectId id; //모든 게임객체에 할당될 아이다.
 	int x;
 	int y;
 	int width;
@@ -20,13 +22,16 @@ abstract public class GameObject {
 	int velX; //0으로 초기화된다.
 	int velY;
 	//float g;
+	Rectangle rect; //교차 테스트에 써먹을 사각형 객체
 	
-	public GameObject(ObjectManager objectManager, int x, int y, int width, int height) {
+	public GameObject(ObjectManager objectManager, ObjectId id, int x, int y, int width, int height) {
 		this.objectManager=objectManager;
+		this.id=id; //어떤 종류인지 구분하기 위함
 		this.x=x;
 		this.y=y;
 		this.width=width;
 		this.height=height;
+		rect=new Rectangle(x, y, width, height);
 	}
 	
 	//추상메소드로 구현 강제
